@@ -21,19 +21,18 @@ bool is_palindrome(int n){
 }
 
 int apply196(int n){
-  int candidato, candidato2;
+  int candidato;
 
   string x = to_string (n);
   reverse(x.begin(),x.end());
   int y = stoi(x);
 
   candidato = y + n;
-
   return candidato;
 }
 
 int main() {
-  int low, high, counterpalindrome = 0, becomepalindrome = 0, Lychrelcounter = 0;
+  int low, high, counterpalindrome = 0, becomepalindrome = 0, Lychrelcounter = 0, nonlychrel, lychrel;
 
   cout << "Introduce el primer numero del rango." << endl;
   cin >> low;
@@ -44,16 +43,19 @@ int main() {
     if(is_palindrome(i) == true){
       counterpalindrome = counterpalindrome + 1;
     }
-    if (apply196(i) == i){
+    nonlychrel = apply196(i);
+    if (is_palindrome(nonlychrel) == true){
       becomepalindrome = becomepalindrome + 1;
-    } else{
+    }
+    lychrel = apply196(nonlychrel);
+    if (is_palindrome(lychrel) == false){
       Lychrelcounter++;
       cout << "Encontre un numero de Lychrel: " << i << endl;
     }
   }
 
   cout << "El rango de numeros analizados fue de " << (high - low) + 1 << " numeros." << endl;
-  cout << "Encontre " << counterpalindrome << "numeros que son palindromos naturales." << endl;
+  cout << "Encontre " << counterpalindrome << " numeros que son palindromos naturales." << endl;
   cout << "Encontre " << becomepalindrome << " numeros que no son numeros de Lychrel." << endl;
   cout << "Encontre " << Lychrelcounter << " numeros de Lychrel." << endl;
 
